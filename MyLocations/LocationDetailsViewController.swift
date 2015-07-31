@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreLocation
+import Dispatch
 
 private let dateFormatter: NSDateFormatter = {
     let formatter = NSDateFormatter()
@@ -33,8 +34,12 @@ class LocationDetailsViewController: UITableViewController {
     var categoryName = "No Category"
     
     @IBAction func done() {
-        println("Descripcion '\(descriptionText)'")
-        dismissViewControllerAnimated(true, completion: nil)
+        //println("Descripcion '\(descriptionText)'")
+        //dismissViewControllerAnimated(true, completion: nil)
+        let hudView = HudView.hudInView(navigationController!.view, animated: true)
+        hudView.text = "Tagged"
+        
+        afterDelay(0.6, { self.dismissViewControllerAnimated(true, completion: nil) })
     }
     
     @IBAction func cancel() {
@@ -65,6 +70,26 @@ class LocationDetailsViewController: UITableViewController {
         }
         
         dateLabel.text = formatDate(NSDate())
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: Selector("hideKeyboard:"))
+        gestureRecognizer.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    func hideKeyboard(gestureRecognizer: UIGestureRecognizer) {
+        let point = gestureRecognizer.locationInView(tableView)
+        let indexPath = tableView.indexPathForRowAtPoint(point)
+        
+        if indexPath != nil && indexPath!.section == 0 && indexPath!.row == 0 {
+            return
+        }
+        
+        descriptionTextView.resignFirstResponder()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        descriptionTextView.frame.size.width = view.frame.size.width - 30
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -98,6 +123,20 @@ class LocationDetailsViewController: UITableViewController {
             return addressLabel.frame.size.height + 20
         } else {
             return 44
+        }
+    }
+    
+    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        if indexPath.section == 0 || indexPath.section == 1 {
+            return indexPath
+        } else {
+            return nil
+        }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            descriptionTextView.becomeFirstResponder()
         }
     }
 }
