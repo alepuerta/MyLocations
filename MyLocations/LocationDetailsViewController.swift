@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import CoreLocation
 import Dispatch
+import CoreData
 
 private let dateFormatter: NSDateFormatter = {
     let formatter = NSDateFormatter()
@@ -32,6 +33,8 @@ class LocationDetailsViewController: UITableViewController {
     
     var descriptionText = ""
     var categoryName = "No Category"
+    
+    var managedObjectContext: NSManagedObjectContext!
     
     @IBAction func done() {
         //println("Descripcion '\(descriptionText)'")
