@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		843C59F31B9727EC00C8CF3F /* LocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843C59F21B9727EC00C8CF3F /* LocationsViewController.swift */; };
 		845C012D1B60DA3E002873F3 /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C012C1B60DA3E002873F3 /* CategoryPickerViewController.swift */; };
 		845C012F1B611652002873F3 /* HudView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845C012E1B611652002873F3 /* HudView.swift */; };
 		84749A161B6F484B00ADC7FC /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84749A141B6F484B00ADC7FC /* DataModel.xcdatamodeld */; };
@@ -20,6 +21,7 @@
 		84B4E93E1B21D24C008C99BA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84B4E93D1B21D24C008C99BA /* Images.xcassets */; };
 		84B4E9411B21D24C008C99BA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B4E93F1B21D24C008C99BA /* LaunchScreen.xib */; };
 		84B4E94D1B21D24C008C99BA /* MyLocationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4E94C1B21D24C008C99BA /* MyLocationsTests.swift */; };
+		84E894231B997FC20000B187 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E894221B997FC20000B187 /* LocationCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		843C59F21B9727EC00C8CF3F /* LocationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsViewController.swift; sourceTree = "<group>"; };
 		845C012C1B60DA3E002873F3 /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
 		845C012E1B611652002873F3 /* HudView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudView.swift; sourceTree = "<group>"; };
 		84749A151B6F484B00ADC7FC /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -50,6 +53,7 @@
 		84B4E9461B21D24C008C99BA /* MyLocationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyLocationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84B4E94B1B21D24C008C99BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84B4E94C1B21D24C008C99BA /* MyLocationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationsTests.swift; sourceTree = "<group>"; };
+		84E894221B997FC20000B187 /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,17 +97,19 @@
 			isa = PBXGroup;
 			children = (
 				84B4E9341B21D24C008C99BA /* AppDelegate.swift */,
-				84B4E9361B21D24C008C99BA /* CurrentLocationViewController.swift */,
-				84B4E9381B21D24C008C99BA /* SecondViewController.swift */,
-				84A0F8121B42876400852B50 /* LocationDetailsViewController.swift */,
 				845C012C1B60DA3E002873F3 /* CategoryPickerViewController.swift */,
-				845C012E1B611652002873F3 /* HudView.swift */,
+				84B4E9361B21D24C008C99BA /* CurrentLocationViewController.swift */,
+				84749A141B6F484B00ADC7FC /* DataModel.xcdatamodeld */,
 				849BA4AB1B6B731800174770 /* Functions.swift */,
-				84B4E93A1B21D24C008C99BA /* Main.storyboard */,
+				845C012E1B611652002873F3 /* HudView.swift */,
 				84B4E93D1B21D24C008C99BA /* Images.xcassets */,
 				84B4E93F1B21D24C008C99BA /* LaunchScreen.xib */,
+				84E894221B997FC20000B187 /* LocationCell.swift */,
+				84A0F8121B42876400852B50 /* LocationDetailsViewController.swift */,
+				843C59F21B9727EC00C8CF3F /* LocationsViewController.swift */,
+				84B4E93A1B21D24C008C99BA /* Main.storyboard */,
+				84B4E9381B21D24C008C99BA /* SecondViewController.swift */,
 				84B4E9321B21D24C008C99BA /* Supporting Files */,
-				84749A141B6F484B00ADC7FC /* DataModel.xcdatamodeld */,
 			);
 			path = MyLocations;
 			sourceTree = "<group>";
@@ -234,10 +240,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				84A0F8131B42876400852B50 /* LocationDetailsViewController.swift in Sources */,
+				843C59F31B9727EC00C8CF3F /* LocationsViewController.swift in Sources */,
 				84749A161B6F484B00ADC7FC /* DataModel.xcdatamodeld in Sources */,
 				84B4E9391B21D24C008C99BA /* SecondViewController.swift in Sources */,
 				845C012F1B611652002873F3 /* HudView.swift in Sources */,
 				84749A181B6F4D1100ADC7FC /* Location.swift in Sources */,
+				84E894231B997FC20000B187 /* LocationCell.swift in Sources */,
 				849BA4AC1B6B731800174770 /* Functions.swift in Sources */,
 				84B4E9351B21D24C008C99BA /* AppDelegate.swift in Sources */,
 				845C012D1B60DA3E002873F3 /* CategoryPickerViewController.swift in Sources */,

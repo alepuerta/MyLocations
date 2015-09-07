@@ -37,14 +37,29 @@ class LocationDetailsViewController: UITableViewController {
     var managedObjectContext: NSManagedObjectContext!
     var date = NSDate()
     
+    var locationToEdit: Location? {
+        didSet {
+            if let location = locationToEdit {
+                descriptionText = location.locationDescription
+                categoryName = location.category
+                date = location.date
+                coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+                placemark = location.placemark
+            }
+        }
+    }
+    
     @IBAction func done() {
         let hudView = HudView.hudInView(navigationController!.view, animated: true)
-        hudView.text = "Tagged"
+        var location: Location
+        if let temp = locationToEdit {
+            hudView.text = "Updated"
+            location = temp
+        } else {
+            hudView.text = "Tagged"
+            location = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: managedObjectContext) as! Location
+        }
         
-        // 1
-        let location = NSEntityDescription.insertNewObjectForEntityForName("Location", inManagedObjectContext: managedObjectContext) as! Location
-        
-        // 2
         location.locationDescription = descriptionText
         location.category = categoryName
         location.latitude = coordinate.latitude
@@ -52,7 +67,6 @@ class LocationDetailsViewController: UITableViewController {
         location.date = date
         location.placemark = placemark
         
-        // 3
         var error: NSError?
         if !managedObjectContext.save(&error) {
             fatalCoreDataError(error)
@@ -76,6 +90,10 @@ class LocationDetailsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let location = locationToEdit {
+            title = "Edit Location"
+        }
         
         descriptionTextView.text = descriptionText
         categoryLabel.text = categoryName
