@@ -44,6 +44,7 @@ class LocationsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         performFetch()
+        navigationItem.rightBarButtonItem = editButtonItem()
     }
     
     func performFetch() {
@@ -82,6 +83,18 @@ class LocationsViewController: UITableViewController {
         
         return cell
     }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let location = fetchedResultsController.objectAtIndexPath(indexPath) as! Location
+            managedObjectContext.deleteObject(location)
+            
+            var error: NSError?
+            if !managedObjectContext.save(&error) {
+                fatalCoreDataError(error)
+            }
+        }
+    }
 }
 
 extension LocationsViewController: NSFetchedResultsControllerDelegate {
@@ -99,20 +112,25 @@ extension LocationsViewController: NSFetchedResultsControllerDelegate {
             switch type {
             case .Insert:
                 println("*** NSFetchedResultsChangeInsert (object)")
-                tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+                tableView.insertRowsAtIndexPaths([newIndexPath!],
+                    withRowAnimation: .Fade)
             case .Delete:
                 println("*** NSFetchedResultsChangeDelete (object)")
-                tableView.deleteRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+                tableView.deleteRowsAtIndexPaths([indexPath!],
+                    withRowAnimation: .Fade)
             case .Update:
                 println("*** NSFetchedResultsChangeUpdate (object)")
-                let cell = tableView.cellForRowAtIndexPath(indexPath!) as! LocationCell
-                
-                let location = controller.objectAtIndexPath(indexPath!) as! Location
+                let cell = tableView.cellForRowAtIndexPath(indexPath!)
+                    as! LocationCell
+                let location = controller.objectAtIndexPath(indexPath!)
+                    as! Location
                 cell.configureForLocation(location)
             case .Move:
                 println("*** NSFetchedResultsChangeMove (object)")
-                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-                tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+                tableView.deleteRowsAtIndexPaths([indexPath!],
+                    withRowAnimation: .Fade)
+                tableView.insertRowsAtIndexPaths([newIndexPath!],
+                    withRowAnimation: .Fade)
             }
     }
     
