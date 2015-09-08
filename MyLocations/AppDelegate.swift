@@ -73,6 +73,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 as! LocationsViewController
             locationsViewController.managedObjectContext = managedObjectContext
             let forceTheViewToLoad = locationsViewController.view
+            
+            let mapViewController = tabBarViewControllers[2] as! MapViewController
+            mapViewController.managedObjectContext = managedObjectContext
         }
         
         listenForFatalCoreDataNotifications()
