@@ -11,6 +11,7 @@ import CoreData
 import CoreLocation
 
 class LocationsViewController: UITableViewController {
+   
     
     var managedObjectContext: NSManagedObjectContext!
     //var locations = [Location]()
